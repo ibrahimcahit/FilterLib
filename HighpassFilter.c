@@ -13,12 +13,12 @@
 void HighpassFilter(Filter_t *DataStruct, int n, float fc, float fs) {
 
   // Set filter order and check bounds
-  order = n;
+	DataStruct->order = n;
   
-  if (order > 2) // Only up to second order at the moment...
-    order = 2;
-  else if (order < 1)
-    order = 1;
+  if (DataStruct->order > 2) // Only up to second order at the moment...
+	  DataStruct->order = 2;
+  else if (DataStruct->order < 1)
+	  DataStruct->order = 1;
 
   // Pre-warp cut-off frequency (Tustin)
   prewarp(DataStruct, fc, fs);
@@ -30,7 +30,7 @@ void HighpassFilter(Filter_t *DataStruct, int n, float fc, float fs) {
   float wcT   = DataStruct->wc * DataStruct->T;
   float wcTsq = wcT * wcT;
   
-  switch (order) {
+  switch (DataStruct->order) {
 
     case 1:
 
