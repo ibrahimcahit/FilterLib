@@ -28,11 +28,11 @@ typedef struct
     float y[FILTER_MAX_ORDER + 1];
 } Filter_t;
 
-void prewarp(float fc, float fs);
-float getwc();
-float getT();
+void prewarp(Filter_t *DataStruct, float fc, float fs);
+float getwc(Filter_t *DataStruct);
+float getT(Filter_t *DataStruct);
 
-void reset();
-float update(float val);
+void reset(Filter_t *DataStruct);
+float update(Filter_t *DataStruct, float val);
 
 #endif
