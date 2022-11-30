@@ -13,12 +13,12 @@
 void ButterworthLPF(Filter_t *DataStruct, int n, float fc, float fs) {
 
   // Set filter order and check bounds
-  order = n;
+  DataStruct->order = n;
   
-  if (order > 4) // Only up to fourth order at the moment...
-    order = 4;
-  else if (order < 1)
-    order = 1;
+  if (DataStruct->order > 4) // Only up to fourth order at the moment...
+	  DataStruct->order = 4;
+  else if (DataStruct->order < 1)
+	  DataStruct->order = 1;
 
   // Pre-warp cut-off frequency (Tustin)
   prewarp(DataStruct, fc, fs);
@@ -27,7 +27,7 @@ void ButterworthLPF(Filter_t *DataStruct, int n, float fc, float fs) {
   reset(DataStruct);
 
   // Set filter numerator and denominator coefficients
-  float wcT   = wc * T;
+  float wcT   = DataStruct->wc * DataStruct->T;
   float wcTsq = wcT * wcT;
   float wcTcu = wcT * wcTsq;
   float wcTfo = wcTsq * wcTsq;
@@ -35,7 +35,7 @@ void ButterworthLPF(Filter_t *DataStruct, int n, float fc, float fs) {
   float alpha = 2.6132;
   float beta  = 3.41430612;
   
-  switch (order) {
+  switch (DataStruct->order) {
 
     case 1:
 
