@@ -32,7 +32,7 @@ float getT(Filter_t *DataStruct) {
 
 void reset(Filter_t *DataStruct) {
 
-  for (int i = 0; i <= order; i++) {
+  for (int i = 0; i <= DataStruct->order; i++) {
     DataStruct->u[i] = 0.0;
     DataStruct->y[i] = 0.0;
   }
@@ -44,7 +44,7 @@ float update(Filter_t *DataStruct, float val) {
   int i;
 
   // Shift samples
-  for (i = order; i > 0; i--) {
+  for (i = DataStruct->order; i > 0; i--) {
     DataStruct->u[i] = DataStruct->u[i - 1];
     DataStruct->y[i] = DataStruct->y[i - 1];
   }
@@ -55,7 +55,7 @@ float update(Filter_t *DataStruct, float val) {
   // Calculate new output
   DataStruct->y[0] = 0.0;
 
-  for (i = 0; i <= order; i++) {
+  for (i = 0; i <= DataStruct->order; i++) {
     DataStruct->y[0] += DataStruct->num[i] * DataStruct->u[i];
 
     if (i > 0)
